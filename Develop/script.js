@@ -29,10 +29,25 @@ function updateCurrentDate() {
   var formattedDate = currentDate.toLocaleDateString('en-US', options); 
   $('#currentDate').text(formattedDate); 
 }
+// Function to apply past, present, future classes to time blocks
+function applyTimeBlockClasses() {
+  var currentHour = dayjs().hour();
 
-  populateDescriptions();
-  updateCurrentDate();
+  $(".time-block").each(function() {
+    var blockHour = parseInt($(this).attr("id").split("-")[1]);
+    if (blockHour < currentHour) {
+      $(this).addClass("past").removeClass("present future");
+    } else if (blockHour === currentHour) {
+      $(this).addClass("present").removeClass("past future");
+    } else {
+      $(this).addClass("future").removeClass("past present");
+    }
+  });
+}
 
+populateDescriptions();
+updateCurrentDate();
+applyTimeBlockClasses();
 
 
 });
