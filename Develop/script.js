@@ -17,6 +17,22 @@ $(function () {
       }
     });
   }
+// Function to update current date in the header
+function updateCurrentDate() {
+  var currentDate = new Date(); 
+  var options = { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  };
+  var formattedDate = currentDate.toLocaleDateString('en-US', options); 
+  $('#currentDate').text(formattedDate); 
+}
+
   populateDescriptions();
+  updateCurrentDate();
+
+
 
 });
